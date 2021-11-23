@@ -5,6 +5,7 @@
     "name": "Name",
     "symbol": "Symbol",
     "price": "Price",
+    "change_in_1h":"1h",
     "change_in_24h": "24h",
     "marketCap": "MarketCap"
 }

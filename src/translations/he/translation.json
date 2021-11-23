@@ -5,6 +5,7 @@
     "name": "שם",
     "symbol": "סמל",
     "price": "מחיר",
-    "change_in_24h": "24שעות",
+    "change_in_1h":"1 שעה",
+    "change_in_24h": "24 שעות",
     "marketCap": "שווי שוק"
 }

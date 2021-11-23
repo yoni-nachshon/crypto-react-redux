@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getCoins = createAsyncThunk('coins/getCoins', async (dispatch, getState) => {
-    return fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd').then((res) => res.json())
+    return fetch('https://api.coingecko.com/api/v3/coins/').then((res) => res.json())
 
 })
 
@@ -18,15 +18,21 @@ const coinsSlice = createSlice({
         sortBySymbol: (state) => {
             state.coins = state.coins.sort((a, b) => a.symbol.localeCompare(b.symbol))
         },
-        sortByRank: (state) => {
-            state.coins = state.coins.sort((a, b) => a.market_cap_rank - b.market_cap_rank)
+        sortByRankDesc: (state) => {
+            state.coins = state.coins.sort((a, b) => a.market_data.market_cap_rank - b.market_data.market_cap_rank)
+        },
+        sortByRankAsce: (state) => {
+            state.coins = state.coins.sort((a, b) => b.market_data.market_cap_rank - a.market_data.market_cap_rank)
         },
         sortByPrice: (state) => {
-            state.coins = state.coins.sort((a, b) => a.current_price.toFixed(2) - b.current_price.toFixed(2))
+            state.coins = state.coins.sort((a, b) => a.market_data.current_price.usd.toFixed(2) - b.market_data.current_price.usd.toFixed(2))
+        },
+        sortBy1h: (state) => {
+            state.coins = state.coins.sort((a, b) => a.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2) - b.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2))
         },
         sortBy24h: (state) => {
-            state.coins = state.coins.sort((a, b) => b.price_change_percentage_24h.toFixed(2) - a.price_change_percentage_24h.toFixed(2))
-        }
+            state.coins = state.coins.sort((a, b) => a.market_data.price_change_percentage_24h.toFixed(2) - b.market_data.price_change_percentage_24h.toFixed(2))
+        },
     },
     extraReducers: {
         [getCoins.pending]: (state, action) => {
@@ -41,5 +47,5 @@ const coinsSlice = createSlice({
         }
     },
 })
-export const { sortByName, sortBySymbol,  sortByRank, sortByPrice, sortBy24h } = coinsSlice.actions
+export const { sortByName, sortBySymbol,  sortByRankDesc,sortByRankAsce, sortByPrice,sortBy1h, sortBy24h } = coinsSlice.actions
 export default coinsSlice.reducer
