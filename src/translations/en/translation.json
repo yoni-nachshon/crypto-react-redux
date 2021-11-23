@@ -1,0 +1,10 @@
+{
+    "allCrypto": "All Cryptocurrencies",
+    "rank": "Rank",
+    "image": "Image",
+    "name": "Name",
+    "symbol": "Symbol",
+    "price": "Price",
+    "change_in_24h": "24h",
+    "marketCap": "MarketCap"
+}
