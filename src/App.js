@@ -1,6 +1,9 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import './App.css';
+// import { Form } from 'react-bootstrap';
+
 import Coins from './app/coins/coins';
 import Coin from "./app/coin/coin";
 import { i18n } from "./translations/i18n";
@@ -19,7 +22,7 @@ function App() {
     <Suspense fallback={"Loading..."}>
       <div className="App">
         <header className="App-header">
-          <select name="language" onChange={onChange}>
+          <select className="select" name="language" onChange={onChange}>
             <option value="en">English</option>
             <option value="he">עברית</option>
           </select>
@@ -27,7 +30,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Coins />} />
-            <Route path="/Coin" element={<Coin />} />
+              <Route path=":coinId" element={<Coin />} />        
           </Routes>
         </BrowserRouter>
       </div>

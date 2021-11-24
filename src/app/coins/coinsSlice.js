@@ -12,11 +12,17 @@ const coinsSlice = createSlice({
         status: null
     },
     reducers: {
-        sortByName: (state) => {
+        sortByNameDesc: (state) => {
             state.coins = state.coins.sort((a, b) => a.name.localeCompare(b.name))
         },
-        sortBySymbol: (state) => {
+        sortByNameAsce: (state) => {
+            state.coins = state.coins.sort((a, b) => b.name.localeCompare(a.name))
+        },
+        sortBySymbolDesc: (state) => {
             state.coins = state.coins.sort((a, b) => a.symbol.localeCompare(b.symbol))
+        },
+        sortBySymbolAsce: (state) => {
+            state.coins = state.coins.sort((a, b) => b.symbol.localeCompare(a.symbol))
         },
         sortByRankDesc: (state) => {
             state.coins = state.coins.sort((a, b) => a.market_data.market_cap_rank - b.market_data.market_cap_rank)
@@ -24,14 +30,23 @@ const coinsSlice = createSlice({
         sortByRankAsce: (state) => {
             state.coins = state.coins.sort((a, b) => b.market_data.market_cap_rank - a.market_data.market_cap_rank)
         },
-        sortByPrice: (state) => {
+        sortByPriceDesc: (state) => {
             state.coins = state.coins.sort((a, b) => a.market_data.current_price.usd.toFixed(2) - b.market_data.current_price.usd.toFixed(2))
         },
-        sortBy1h: (state) => {
+        sortByPriceAsce: (state) => {
+            state.coins = state.coins.sort((a, b) => b.market_data.current_price.usd.toFixed(2) - a.market_data.current_price.usd.toFixed(2))
+        },
+        sortBy1hDesc: (state) => {
             state.coins = state.coins.sort((a, b) => a.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2) - b.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2))
         },
-        sortBy24h: (state) => {
+        sortBy1hAsce: (state) => {
+            state.coins = state.coins.sort((a, b) => b.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2) - a.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2))
+        },
+        sortBy24hDesc: (state) => {
             state.coins = state.coins.sort((a, b) => a.market_data.price_change_percentage_24h.toFixed(2) - b.market_data.price_change_percentage_24h.toFixed(2))
+        },
+        sortBy24hAsce: (state) => {
+            state.coins = state.coins.sort((a, b) => b.market_data.price_change_percentage_24h.toFixed(2) - a.market_data.price_change_percentage_24h.toFixed(2))
         },
     },
     extraReducers: {
@@ -47,5 +62,5 @@ const coinsSlice = createSlice({
         }
     },
 })
-export const { sortByName, sortBySymbol,  sortByRankDesc,sortByRankAsce, sortByPrice,sortBy1h, sortBy24h } = coinsSlice.actions
+export const { sortByNameDesc, sortByNameAsce, sortBySymbolDesc, sortBySymbolAsce, sortByRankDesc, sortByRankAsce, sortByPriceDesc, sortByPriceAsce, sortBy1hDesc, sortBy1hAsce, sortBy24hDesc, sortBy24hAsce } = coinsSlice.actions
 export default coinsSlice.reducer
