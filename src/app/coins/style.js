@@ -6,8 +6,7 @@ export const style = {
         flexDirection: 'column',
         alignItems: 'center',
         fontSize: '14px',
-        marginTop: '2rem'
-                
+        marginTop: '2rem'               
     },
     table: {
         marginTop: '2rem',
@@ -16,5 +15,12 @@ export const style = {
     sort: {      
         border:'none',
         textAlgin: 'center'
+    },
+    spinner: {
+        width:'150px',
+        marginRight:'auto',
+        marginLeft:'auto',
+        marginTop:'20rem'
+        
     }
 }

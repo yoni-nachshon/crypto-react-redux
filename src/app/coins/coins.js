@@ -6,7 +6,8 @@ import { useTranslation } from "react-i18next";
 import '../../translations/i18n';
 import { makeStyles } from '@mui/styles';
 import { style } from "./style";
-import { Table } from 'react-bootstrap';
+import { Table, Spinner } from 'react-bootstrap';
+
 
 const useStyles = makeStyles(style);
 
@@ -23,18 +24,21 @@ export default function Coins(props) {
     const { coins } = useSelector((state) => state.coins)
 
     const [crypto, setCrypto] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setCrypto(coins)
+        setLoading(false)
     }, [coins])
 
     useEffect(() => {
+        setLoading(true)
         dispatch(getCoins())
-
         setInterval(() => {
             dispatch(getCoins())
         }, 60 * 1000);
     }, [dispatch])
+
 
     const sortIcon = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-up" viewBox="0 0 16 16">
         <path fillRule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
@@ -56,12 +60,12 @@ export default function Coins(props) {
     const nameHandle = () => {
         if (!clicked) {
             const copy = [...coins]
-            copy.sort((a, b) => b.name.localeCompare(a.name))
+            copy.sort((a, b) => a.name.localeCompare(b.name))
             setCrypto(copy)
             setClicked(true)
         } else {
             const copy = [...coins]
-            copy.sort((a, b) => a.name.localeCompare(b.name))
+            copy.sort((a, b) => b.name.localeCompare(a.name))
             setCrypto(copy)
             setClicked(false)
         }
@@ -119,18 +123,23 @@ export default function Coins(props) {
         }
     }
 
-    return (
+    return loading ? (
+
+        <div className={classes.spinner}>
+            <Spinner animation="border" role="status" />
+        </div>
+
+    ) : (
         <div className={classes.list} >
 
             <h3>{t("allCrypto")}</h3>
 
             <input style={{ marginTop: '1rem', marginRight: '1rem' }} type="text" placeholder={t("search")} onChange={(e) => { setSearch(e.target.value) }} />
 
-            <Table responsive="md" className={classes.table} hover>
+            <Table responsive="md" className={classes.table} bordered hover>
                 <thead >
                     <tr >
                         <th>{t("rank")} <button className={classes.sort} onClick={rankHandle}>{sortIcon}</button> </th>
-                        <th>{t("image")} &nbsp;</th>
                         <th>{t("name")}<button className={classes.sort} onClick={nameHandle}>{sortIcon}</button></th>
                         <th>{t("symbol")} <button className={classes.sort} onClick={symbolHandle}>{sortIcon}</button></th>
                         <th>{t("price")} <button className={classes.sort} onClick={priceHandle}>{sortIcon}</button></th>
@@ -150,13 +159,13 @@ export default function Coins(props) {
                             const change_24h = coin.market_data.price_change_percentage_24h.toFixed(2);
                             return (
                                 <tr key={i}>
-                                    <td >{coin.market_data.market_cap_rank}</td>
-                                    <td >
-                                        <Link to={`/${coin.id}`} key={i}>
-                                            <img src={coin.image.thumb} alt='' />
-                                        </Link>
+                                    <td>{coin.market_data.market_cap_rank}</td>
+                                    <td><Link to={`/${coin.id}`} key={i}>
+                                        <img src={coin.image.thumb} alt='' />
+                                    </Link>
+                                        &nbsp;&nbsp;&nbsp;
+                                        {coin.name}
                                     </td>
-                                    <td >{coin.name} </td>
                                     <td >{coin.symbol}</td>
                                     <td >${coin.market_data.current_price.usd.toFixed(2)}</td>
                                     <td style={{ color: change_1h > 0 ? 'green' : 'red' }}>{change_1h}%</td>

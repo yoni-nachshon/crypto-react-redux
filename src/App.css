@@ -1,20 +1,4 @@
-.App {
-  text-align: center;
-   
-  /* min-height: 100vh; */
-}
 
-.App-header {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  padding-top: 8px;
-  padding-bottom: 8px;
-  /* font-size: calc(10px + 2vmin); */
-  background-color: #282c3488;
-  color: white;
-}
-
-select {
-  font-size: 16px
+.nav {
+    direction: ltr;
 }

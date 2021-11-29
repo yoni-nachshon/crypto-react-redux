@@ -1,16 +1,15 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import './App.css';
-// import { Form } from 'react-bootstrap';
-
 import Coins from './app/coins/coins';
 import Coin from "./app/coin/coin";
 import { i18n } from "./translations/i18n";
+import { ButtonGroup, Button, Container, Navbar } from 'react-bootstrap';
 
 function App() {
 
-  const onChange = (event) => {
+  const onClick = (event) => {
+    event.preventDefault()
     if (event.target.value === "he") {
       document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
     } else {
@@ -19,22 +18,29 @@ function App() {
     i18n.changeLanguage(event.target.value);
   };
   return (
-    <Suspense fallback={"Loading..."}>
+
       <div className="App">
-        <header className="App-header">
-          <select className="select" name="language" onChange={onChange}>
-            <option value="en">English</option>
-            <option value="he">עברית</option>
-          </select>
-        </header>
+        <Navbar className="nav" bg="dark" variant="dark">
+        <Container>
+      
+
+        <Navbar.Brand href="#home">Crypto App</Navbar.Brand>
+          <ButtonGroup className="nav">
+            <Button size="sm" variant="outline-light" value="en" onClick={onClick}>English</Button>
+            <Button size="sm" variant="outline-light" value="he" onClick={onClick}>עברית</Button>
+          </ButtonGroup>     
+
+        
+        </Container>
+        </Navbar>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Coins />} />
-              <Route path=":coinId" element={<Coin />} />        
+            <Route path=":coinId" element={<Coin />} />
           </Routes>
         </BrowserRouter>
       </div>
-    </Suspense>
+ 
   );
 }
 
