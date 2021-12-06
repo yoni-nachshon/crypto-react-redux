@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import '../../translations/i18n';
 import { makeStyles } from '@mui/styles';
 import { style } from "./style";
-import { Table, Spinner } from 'react-bootstrap';
+import { Table, Spinner, Container, FormControl, Navbar } from 'react-bootstrap';
 
 
 const useStyles = makeStyles(style);
@@ -130,11 +130,11 @@ export default function Coins(props) {
         </div>
 
     ) : (
-        <div className={classes.list} >
+        <Container className={classes.list}>
 
-            <h3>{t("allCrypto")}</h3>
+            <Navbar.Brand>{t("top50")}</Navbar.Brand>
 
-            <input style={{ marginTop: '1rem', marginRight: '1rem' }} type="text" placeholder={t("search")} onChange={(e) => { setSearch(e.target.value) }} />
+            <FormControl style={{ marginTop: '1rem', width:'15rem' }} size="sm" type="text" placeholder={t("search")} onChange={(e) => { setSearch(e.target.value) }} />
 
             <Table responsive="md" className={classes.table} bordered hover>
                 <thead >
@@ -160,9 +160,10 @@ export default function Coins(props) {
                             return (
                                 <tr key={i}>
                                     <td>{coin.market_data.market_cap_rank}</td>
-                                    <td><Link to={`/${coin.id}`} key={i}>
-                                        <img src={coin.image.thumb} alt='' />
-                                    </Link>
+                                    <td>
+                                        <Link to={`/${coin.id}`} key={i}>
+                                            <img src={coin.image.thumb} alt='' />
+                                        </Link>
                                         &nbsp;&nbsp;&nbsp;
                                         {coin.name}
                                     </td>
@@ -174,10 +175,8 @@ export default function Coins(props) {
                                 </tr>
                             );
                         })}
-
                 </tbody>
-            </Table>
-
-        </div>
+            </Table>     
+        </Container>
     )
 }

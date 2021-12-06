@@ -1,13 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { ProgressBar } from 'react-bootstrap';
+import { getCoins } from '../coins/coinsSlice';
+import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
+
 
 
 export default function Coin() {
 
+    const dispatch = useDispatch()
     const { coins } = useSelector((state) => state.coins)
+
+    useEffect(() => {    
+        dispatch(getCoins())             
+    }, [dispatch])
 
     const params = useParams();
 
@@ -15,7 +21,7 @@ export default function Coin() {
         <Container style={{ marginTop: '10rem', direction:'ltr' }} >
             <Row >
                 <Col md={{ span: 6, offset: 4 }} >
-                    <Card style={{ width: '18rem' }} border="dark">
+                    <Card style={{ width: '18rem',boxShadow: '0px 10px 30px 0px' }}>
                         {coins
                             .filter(coin => coin.id === params.coinId)
                             .map((coin, i) => {
@@ -27,13 +33,13 @@ export default function Coin() {
                                     <Card.Body key={i}>
                                         <div style={{ textAlign: 'left'}} >
                                             <Card.Title> Rank {coin.market_data.market_cap_rank}</Card.Title>
-                                            <Card.Text>
+                                           
                                                 <img src={coin.image.thumb} alt='' /> {coin.name} ({coin.symbol})
-                                                <div style={{ marginTop: '0.2rem', fontSize: '20px', fontWeight: 600 }}>
+                                                <div style={{ marginTop: '0.2rem',marginBottom:'1rem', fontSize: '20px', fontWeight: 600 }}>
                                                     ${current}&nbsp;
                                                     <span style={{ fontSize: '14px', color: _24h > 0 ? 'green' : 'red' }}>{_24h}%</span>
                                                 </div>
-                                            </Card.Text>
+                                           
                                             <ProgressBar style={{ width: '15.5rem',height:'10px',backgroundColor:'#D3D3D3'}} variant="warning" min={low_24h}  now={current} max={high_24h} />
                                             <div style={{ fontSize: '12px', fontWeight: 600, marginTop:'0.3rem' }}> ${coin.market_data.low_24h.usd.toFixed(2)}
                                                 <span style={{ marginLeft: '2.5rem' }}>24H Range</span>

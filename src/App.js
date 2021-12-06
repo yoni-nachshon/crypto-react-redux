@@ -1,12 +1,11 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css';
+import { Routes, Route } from "react-router-dom";
 import Coins from './app/coins/coins';
 import Coin from "./app/coin/coin";
 import { i18n } from "./translations/i18n";
 import { ButtonGroup, Button, Container, Navbar } from 'react-bootstrap';
 
-function App() {
+export default function App() {
 
   const onClick = (event) => {
     event.preventDefault()
@@ -18,30 +17,23 @@ function App() {
     i18n.changeLanguage(event.target.value);
   };
   return (
+    <> 
+      <Navbar bg="light" variant="light" style={{ direction: 'ltr' }}>
+      <Container style={{justifyContent:'space-around'}}>       
+          <Navbar.Brand >Crypto App</Navbar.Brand>
+          <ButtonGroup style={{border:'none'}}>
+            <Button size="sm" variant="outline-dark" value="en" onClick={onClick}>English</Button>
+            <Button size="sm" variant="outline-dark" value="he" onClick={onClick}>עברית</Button>
+          </ButtonGroup>        
+          </Container>
+      </Navbar>
 
-      <div className="App">
-        <Navbar className="nav" bg="dark" variant="dark">
-        <Container>
-      
-
-        <Navbar.Brand href="#home">Crypto App</Navbar.Brand>
-          <ButtonGroup className="nav">
-            <Button size="sm" variant="outline-light" value="en" onClick={onClick}>English</Button>
-            <Button size="sm" variant="outline-light" value="he" onClick={onClick}>עברית</Button>
-          </ButtonGroup>     
-
-        
-        </Container>
-        </Navbar>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Coins />} />
-            <Route path=":coinId" element={<Coin />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
- 
+      <Routes>
+        <Route path="/" element={<Coins />} />
+        <Route path=":coinId" element={<Coin />} />
+      </Routes>
+    </>
   );
 }
 
-export default App;
+
