@@ -22,5 +22,10 @@ export const style = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    input: {
+        marginTop: '1rem',
+        width: '15rem'
     }
+
 }

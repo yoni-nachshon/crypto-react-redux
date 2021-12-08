@@ -11,7 +11,7 @@ import { Table, Spinner, Container, FormControl, Navbar } from 'react-bootstrap'
 
 const useStyles = makeStyles(style);
 
-export default function Coins(props) {
+export default function Coins() {
 
     const classes = useStyles();
 
@@ -134,7 +134,7 @@ export default function Coins(props) {
 
             <Navbar.Brand>{t("top50")}</Navbar.Brand>
 
-            <FormControl style={{ marginTop: '1rem', width:'15rem' }} size="sm" type="text" placeholder={t("search")} onChange={(e) => { setSearch(e.target.value) }} />
+            <FormControl className={classes.input} size="sm" type="text" placeholder={t("search")} onChange={(e) => { setSearch(e.target.value) }} />
 
             <Table responsive="md" className={classes.table} bordered hover>
                 <thead >
@@ -176,7 +176,7 @@ export default function Coins(props) {
                             );
                         })}
                 </tbody>
-            </Table>     
+            </Table>
         </Container>
     )
 }
