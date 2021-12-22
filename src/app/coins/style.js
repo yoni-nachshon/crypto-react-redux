@@ -1,12 +1,11 @@
 
 
 export const style = {
-    list: {
+    header: {
         display: ' flex',
         flexDirection: 'column',
         alignItems: 'center',
         fontSize: '14px',
-        marginTop: '2rem'
     },
     table: {
         marginTop: '2rem',
@@ -14,7 +13,7 @@ export const style = {
     },
     sort: {
         border: 'none',
-        textAlgin: 'center'
+        textAlgin: 'center',
     },
     spinner: {
         width: '100vw',
@@ -24,8 +23,14 @@ export const style = {
         justifyContent: 'center'
     },
     input: {
+        float:'right',
+        width: '15rem',
+    },
+    select: {
+        float:'right',
+        width: '10rem',
         marginTop: '1rem',
-        width: '15rem'
+       
     }
 
 }

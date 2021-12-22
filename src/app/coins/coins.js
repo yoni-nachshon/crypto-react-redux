@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import useDarkMode from '../../useDarkMode';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCoins } from './coinsSlice';
+import { i18n } from '../../translations/i18n';
 import { useTranslation } from "react-i18next";
-import '../../translations/i18n';
 import { makeStyles } from '@mui/styles';
 import { style } from "./style";
-import { Table, Spinner, Container, FormControl, Navbar } from 'react-bootstrap';
+import { Table, Spinner, Form, FormControl, Navbar, Button } from 'react-bootstrap';
+import { night, sun, sortIcon } from '../../icons';
 
 
 const useStyles = makeStyles(style);
@@ -16,6 +18,8 @@ export default function Coins() {
     const classes = useStyles();
 
     const { t } = useTranslation();
+
+    const { theme, toggleTheme } = useDarkMode()
 
     const [search, setSearch] = useState('');
     const [clicked, setClicked] = useState(false)
@@ -39,10 +43,15 @@ export default function Coins() {
         }, 60 * 1000);
     }, [dispatch])
 
-
-    const sortIcon = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-up" viewBox="0 0 16 16">
-        <path fillRule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
-    </svg>
+    const onChange = (event) => {
+        event.preventDefault()
+        if (event.target.value === "he") {
+            document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
+        } else {
+            document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+        }
+        i18n.changeLanguage(event.target.value);
+    };
 
     const rankHandle = () => {
         if (!clicked) {
@@ -130,25 +139,36 @@ export default function Coins() {
         </div>
 
     ) : (
-        <Container className={classes.list}>
 
-            <Navbar.Brand>{t("top50")}</Navbar.Brand>
-
-            <FormControl className={classes.input} size="sm" type="text" placeholder={t("search")} onChange={(e) => { setSearch(e.target.value) }} />
-
-            <Table responsive="md" className={classes.table} bordered hover>
+        <div className={classes.header} style={{
+            background: theme === 'dark' ? '#000' : '#fff',
+            color: theme === 'dark' ? '#fff' : '#000',
+        }}>             
+                <Button variant={theme === 'dark' ? "dark" : "light"} size="sm" type="button" onClick={toggleTheme}>
+                {theme === 'dark' ? sun : night}
+                    </Button>                         
+                <Form.Select className={classes.select} size="sm" onChange={onChange}>
+                        <option value="en">English</option>
+                        <option value="he">עברית</option>
+                    </Form.Select>
+                    <Navbar.Brand style={{ marginTop:'1rem' }}>{t("top50")}</Navbar.Brand>             
+                    <FormControl
+                        style={{ width: '15rem',marginTop:'1rem' }} size="sm" type="text"
+                        placeholder={t("search")} onChange={(e) => { setSearch(e.target.value) }}
+                    />
+            <Table responsive="md" variant={theme === 'dark' ? "dark" : "light"} className={classes.table} bordered hover>
                 <thead >
                     <tr >
-                        <th>{t("rank")} <button className={classes.sort} onClick={rankHandle}>{sortIcon}</button> </th>
-                        <th>{t("name")}<button className={classes.sort} onClick={nameHandle}>{sortIcon}</button></th>
-                        <th>{t("symbol")} <button className={classes.sort} onClick={symbolHandle}>{sortIcon}</button></th>
-                        <th>{t("price")} <button className={classes.sort} onClick={priceHandle}>{sortIcon}</button></th>
-                        <th>{t("change_in_1h")} <button className={classes.sort} onClick={h1Handle}>{sortIcon}</button></th>
-                        <th>{t("change_in_24h")}<button className={classes.sort} onClick={h24Handle}>{sortIcon}</button></th>
-                        <th>{t("marketCap")}<button className={classes.sort} onClick={rankHandle}>{sortIcon}</button></th>
+                        <th>{t("rank")}&nbsp;<Button size="sm" variant={theme === 'dark' ? "dark" : "light"} className={classes.sort} onClick={rankHandle}>{sortIcon}</Button> </th>
+                        <th>{t("name")}&nbsp;<Button size="sm" variant={theme === 'dark' ? "dark" : "light"} className={classes.sort} onClick={nameHandle}>{sortIcon}</Button></th>
+                        <th>{t("symbol")}&nbsp;<Button size="sm" variant={theme === 'dark' ? "dark" : "light"} className={classes.sort} onClick={symbolHandle}>{sortIcon}</Button></th>
+                        <th>{t("price")}&nbsp;<Button size="sm" variant={theme === 'dark' ? "dark" : "light"} className={classes.sort} onClick={priceHandle}>{sortIcon}</Button></th>
+                        <th>{t("change_in_1h")}&nbsp;<Button size="sm" variant={theme === 'dark' ? "dark" : "light"} className={classes.sort} onClick={h1Handle}>{sortIcon}</Button></th>
+                        <th>{t("change_in_24h")}&nbsp;<Button size="sm" variant={theme === 'dark' ? "dark" : "light"} className={classes.sort} onClick={h24Handle}>{sortIcon}</Button></th>
+                        <th>{t("marketCap")}&nbsp;<Button size="sm" variant={theme === 'dark' ? "dark" : "light"} className={classes.sort} onClick={rankHandle}>{sortIcon}</Button></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {crypto
                         .filter((coin) => {
                             return coin.name.toLowerCase().includes(search.toLowerCase())
@@ -177,6 +197,6 @@ export default function Coins() {
                         })}
                 </tbody>
             </Table>
-        </Container>
+        </div>
     )
 }
