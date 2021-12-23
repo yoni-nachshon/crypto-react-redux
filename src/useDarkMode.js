@@ -5,7 +5,7 @@ export default function useDarkMode(){
     const [theme, setTheme] = useState('light')
 
     const toggleTheme = () => {
-      setTheme(theme === 'light' ? 'dark' : 'light');
+      setTheme(theme === 'dark' ? 'light' : 'dark');
     }
 
     useEffect(() => {
