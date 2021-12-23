@@ -30,6 +30,7 @@ export const style = {
         float:'right',
         width: '10rem',
         marginTop: '1rem',
+        direction:'ltr'
        
     }
 

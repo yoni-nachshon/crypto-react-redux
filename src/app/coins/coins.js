@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+
 import useDarkMode from '../../useDarkMode';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCoins } from './coinsSlice';
 import { i18n } from '../../translations/i18n';
 import { useTranslation } from "react-i18next";
+
 import { makeStyles } from '@mui/styles';
 import { style } from "./style";
 import { Table, Spinner, Form, FormControl, Navbar, Button } from 'react-bootstrap';

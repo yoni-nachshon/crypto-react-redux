@@ -9,11 +9,11 @@ export default function useDarkMode(){
     }
 
     useEffect(() => {
-      setTheme(JSON.parse(localStorage.getItem('theme')))  
+      setTheme(localStorage.getItem('theme'))  
     }, [])
   
     useEffect(() => {
-      localStorage.setItem('theme', JSON.stringify(theme))
+      localStorage.setItem('theme',theme)
     }, [theme])
 
     return {
