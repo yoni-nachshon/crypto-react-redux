@@ -17,20 +17,23 @@ const useStyles = makeStyles(style);
 
 export default function Coins() {
 
-    const classes = useStyles();
-
+    
     const { t } = useTranslation();
-
+    
     const { theme, toggleTheme } = useDarkMode()
-
+    
     const [search, setSearch] = useState('');
     const [clicked, setClicked] = useState(false)
-
+    
     const dispatch = useDispatch()
     const { coins } = useSelector((state) => state.coins)
-
+    
     const [crypto, setCrypto] = useState([])
     const [loading, setLoading] = useState(false)
+
+    const classes = useStyles({
+        theme: theme
+    });
 
     useEffect(() => {
         setCrypto(coins)
@@ -142,10 +145,7 @@ export default function Coins() {
 
     ) : (
 
-        <div className={classes.header} style={{
-            background: theme === 'dark' ? '#000' : '#fff',
-            color: theme === 'dark' ? '#fff' : '#000',
-        }}>             
+        <div className={classes.header}>             
                 <Button variant={theme === 'dark' ? "dark" : "light"} size="sm" type="button" onClick={toggleTheme}>
                 {theme === 'dark' ? sun : night}
                     </Button>                         
@@ -153,9 +153,9 @@ export default function Coins() {
                         <option value="en">English</option>
                         <option value="he">עברית</option>
                     </Form.Select>
-                    <Navbar.Brand style={{ marginTop:'1rem' }}>{t("top50")}</Navbar.Brand>             
+                    <Navbar.Brand className={classes.title}>{t("top50")}</Navbar.Brand>             
                     <FormControl
-                        style={{ width: '15rem',marginTop:'1rem' }} size="sm" type="text"
+                        className={classes.input} size="sm" type="text"
                         placeholder={t("search")} onChange={(e) => { setSearch(e.target.value) }}
                     />
             <Table responsive="md" variant={theme === 'dark' ? "dark" : "light"} className={classes.table} bordered hover>
