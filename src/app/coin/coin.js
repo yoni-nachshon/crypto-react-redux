@@ -35,8 +35,12 @@ export default function Coin() {
                                 const low_24h = coin.market_data.low_24h.usd.toFixed(2)
                                 return (
                                     <Card.Body key={i}>
+
                                         <div style={{ textAlign: 'left' }} >
-                                            <Card.Title> Rank {coin.market_data.market_cap_rank}</Card.Title>
+                                            <Card.Title>
+                                                Rank {coin.market_data.market_cap_rank}
+                                            </Card.Title>
+
                                             <img src={coin.image.thumb} alt='' /> {coin.name} ({coin.symbol})
                                             <div className={classes.current} >
                                                 ${current}&nbsp;

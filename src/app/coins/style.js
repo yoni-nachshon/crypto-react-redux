@@ -1,7 +1,7 @@
 
 
 export const style = {
-    header: ({ theme }) => ({
+    container: ({ theme }) => ({
         background: theme === 'dark' ? '#343a40' : '#f8f9fa',
         color: theme === 'dark' ? '#343a40' : '#f8f9fa',
         display: ' flex',
