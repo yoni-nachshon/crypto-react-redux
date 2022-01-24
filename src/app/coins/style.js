@@ -1,10 +1,7 @@
 
 
 export const style = {
-    changeTheme: ({ theme }) => ({
-        background: theme === "dark" ? "dark" : "light",
-        color: theme === "dark" ? "dark" : "light"
-    }),
+   
     container: ({ theme }) => ({
         background: theme === 'dark' ? '#343a40' : '#f8f9fa',
         color: theme === 'dark' ? '#343a40' : '#f8f9fa',
