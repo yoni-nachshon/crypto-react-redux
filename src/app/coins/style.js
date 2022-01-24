@@ -1,7 +1,7 @@
 
 
 export const style = {
-   
+
     container: ({ theme }) => ({
         background: theme === 'dark' ? '#343a40' : '#f8f9fa',
         color: theme === 'dark' ? '#343a40' : '#f8f9fa',
@@ -27,7 +27,15 @@ export const style = {
     },
     input: {
         width: '15rem',
-        marginTop:'1rem'
+        marginTop: '1rem'
+    },
+    notFound: {
+        height: "75vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: '18px',
+        fontWeight: 600,
     },
     select: {
         float: 'right',

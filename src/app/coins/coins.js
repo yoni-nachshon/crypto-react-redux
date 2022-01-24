@@ -84,6 +84,8 @@ export default function Coins() {
     setSortMode(sortMode === sortType.asc ? sortType.desc : sortType.asc);
   };
 
+  const coinList = crypto.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()))
+
   return loading ? (
     <div className={classes.spinner}>
       <Spinner animation="border" role="status" />
@@ -120,109 +122,105 @@ export default function Coins() {
         bordered
         hover
       >
-        <thead>
-          <tr>
-            <th>
-              {t("rank")}&nbsp;
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "dark" : "light"}
-                className={classes.sort}
-                onClick={() => sortHandler(["market_data", "market_cap_rank"])}
-              >
-                {sortIcon}
-              </Button>{" "}
-            </th>
-            <th>
-              {t("name")}&nbsp;
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "dark" : "light"}
-                className={classes.sort}
-                onClick={() => sortHandler(["name"])}
-              >
-                {sortIcon}
-              </Button>
-            </th>
-            <th>
-              {t("symbol")}&nbsp;
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "dark" : "light"}
-                className={classes.sort}
-                onClick={() => sortHandler(["symbol"])}
-              >
-                {sortIcon}
-              </Button>
-            </th>
-            <th>
-              {t("price")}&nbsp;
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "dark" : "light"}
-                className={classes.sort}
-                onClick={() =>
-                  sortHandler(["market_data", "current_price", "usd"])
-                }
-              >
-                {sortIcon}
-              </Button>
-            </th>
-            <th>
-              {t("change_in_1h")}&nbsp;
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "dark" : "light"}
-                className={classes.sort}
-                onClick={() =>
-                  sortHandler([
-                    "market_data",
-                    "price_change_percentage_1h_in_currency",
-                    "usd",
-                  ])
-                }
-              >
-                {sortIcon}
-              </Button>
-            </th>
-            <th>
-              {t("change_in_24h")}&nbsp;
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "dark" : "light"}
-                className={classes.sort}
-                onClick={() =>
-                  sortHandler(["market_data", "price_change_percentage_24h"])
-                }
-              >
-                {sortIcon}
-              </Button>
-            </th>
-            <th>
-              {t("marketCap")}&nbsp;
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "dark" : "light"}
-                className={classes.sort}
-                onClick={() => sortHandler(["market_data", "market_cap_rank"])}
-              >
-                {sortIcon}
-              </Button>
-            </th>
-          </tr>
-        </thead>
+        {coinList.length ? (
+          <thead>
+            <tr>
+              <th>
+                {t("rank")}&nbsp;
+                <Button
+                  size="sm"
+                  variant={theme === "dark" ? "dark" : "light"}
+                  className={classes.sort}
+                  onClick={() => sortHandler(["market_data", "market_cap_rank"])}
+                >
+                  {sortIcon}
+                </Button>{" "}
+              </th>
+              <th>
+                {t("name")}&nbsp;
+                <Button
+                  size="sm"
+                  variant={theme === "dark" ? "dark" : "light"}
+                  className={classes.sort}
+                  onClick={() => sortHandler(["name"])}
+                >
+                  {sortIcon}
+                </Button>
+              </th>
+              <th>
+                {t("symbol")}&nbsp;
+                <Button
+                  size="sm"
+                  variant={theme === "dark" ? "dark" : "light"}
+                  className={classes.sort}
+                  onClick={() => sortHandler(["symbol"])}
+                >
+                  {sortIcon}
+                </Button>
+              </th>
+              <th>
+                {t("price")}&nbsp;
+                <Button
+                  size="sm"
+                  variant={theme === "dark" ? "dark" : "light"}
+                  className={classes.sort}
+                  onClick={() =>
+                    sortHandler(["market_data", "current_price", "usd"])
+                  }
+                >
+                  {sortIcon}
+                </Button>
+              </th>
+              <th>
+                {t("change_in_1h")}&nbsp;
+                <Button
+                  size="sm"
+                  variant={theme === "dark" ? "dark" : "light"}
+                  className={classes.sort}
+                  onClick={() =>
+                    sortHandler([
+                      "market_data",
+                      "price_change_percentage_1h_in_currency",
+                      "usd",
+                    ])
+                  }
+                >
+                  {sortIcon}
+                </Button>
+              </th>
+              <th>
+                {t("change_in_24h")}&nbsp;
+                <Button
+                  size="sm"
+                  variant={theme === "dark" ? "dark" : "light"}
+                  className={classes.sort}
+                  onClick={() =>
+                    sortHandler(["market_data", "price_change_percentage_24h"])
+                  }
+                >
+                  {sortIcon}
+                </Button>
+              </th>
+              <th>
+                {t("marketCap")}&nbsp;
+                <Button
+                  size="sm"
+                  variant={theme === "dark" ? "dark" : "light"}
+                  className={classes.sort}
+                  onClick={() => sortHandler(["market_data", "market_cap_rank"])}
+                >
+                  {sortIcon}
+                </Button>
+              </th>
+            </tr>
+          </thead>
+        ) : null}
+
         <tbody>
-          {crypto
-            .filter((coin) => {
-              return coin.name.toLowerCase().includes(search.toLowerCase());
-            })
-            .map((coin, i) => {
-              const change_1h =
-                coin.market_data.price_change_percentage_1h_in_currency.usd.toFixed(
-                  2
-                );
-              const change_24h =
-                coin.market_data.price_change_percentage_24h.toFixed(2);
+          {coinList.length ?
+            coinList.map((coin, i) => {
+              const change_1h = coin.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2);
+              const change_24h = coin.market_data.price_change_percentage_24h.toFixed(2);
               return (
                 <tr key={i}>
                   <td>{coin.market_data.market_cap_rank}</td>
@@ -243,8 +241,11 @@ export default function Coins() {
                   </td>
                   <td>${coin.market_data.market_cap.usd.toLocaleString()}</td>
                 </tr>
-              );
-            })}
+              )
+            }
+            ) : (
+              <div className={classes.notFound}>Currency not found</div>
+            )}
         </tbody>
       </Table>
     </div>

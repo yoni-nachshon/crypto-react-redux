@@ -17,7 +17,7 @@ export default function Coin() {
 
     useEffect(() => {
         dispatch(getCoins())
-    }, [dispatch])
+    }, [dispatch]);
 
     const params = useParams();
 
