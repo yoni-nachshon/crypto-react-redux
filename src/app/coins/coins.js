@@ -9,14 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import { makeStyles } from "@mui/styles";
 import { style } from "./style";
-import {
-  Table,
-  Spinner,
-  Form,
-  FormControl,
-  Navbar,
-  Button,
-} from "react-bootstrap";
+import { Table, Spinner, Form, FormControl, Navbar, Button } from "react-bootstrap";
 import { night, sun, sortIcon } from "../../icons";
 
 const useStyles = makeStyles(style);
@@ -27,6 +20,7 @@ const sortType = Object.freeze({
 });
 
 export default function Coins() {
+
   const { t } = useTranslation();
 
   const { theme, toggleTheme } = useDarkMode();
@@ -59,12 +53,8 @@ export default function Coins() {
 
   const onChange = (event) => {
     event.preventDefault();
-    if (event.target.value === "he") {
-      document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
-    } else {
-      document.getElementsByTagName("html")[0].setAttribute("dir", "ltr");
-    }
-    i18n.changeLanguage(event.target.value);
+    event.target.value === "he" ? document.body.dir = i18n.dir("he") : document.body.dir = i18n.dir("en")
+    i18n.changeLanguage(event.target.value)
   };
 
   const getValueByPath = (obj, path) => {
@@ -77,9 +67,11 @@ export default function Coins() {
 
   const sortHandler = (sortBy) => {
     const copy = [...coins];
-    if (typeof getValueByPath(copy,[0,...sortBy]) === "string") {
+    if (typeof getValueByPath(copy, [0, ...sortBy]) === "string") {
       copy.sort((a, b) => {
-        const res = getValueByPath(a, sortBy).localeCompare(getValueByPath(b, sortBy));
+        const res = getValueByPath(a, sortBy).localeCompare(
+          getValueByPath(b, sortBy)
+        );
         return sortMode === sortType.asc ? res : -res;
       });
     } else {
