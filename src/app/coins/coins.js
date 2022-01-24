@@ -77,7 +77,7 @@ export default function Coins() {
 
   const sortHandler = (sortBy) => {
     const copy = [...coins];
-    if (typeof copy[0][sortBy] === "string") {
+    if (typeof getValueByPath(copy,[0,...sortBy]) === "string") {
       copy.sort((a, b) => {
         const res = getValueByPath(a, sortBy).localeCompare(getValueByPath(b, sortBy));
         return sortMode === sortType.asc ? res : -res;
