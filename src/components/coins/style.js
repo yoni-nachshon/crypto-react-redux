@@ -10,9 +10,14 @@ export const style = {
         alignItems: 'center',
         fontSize: '14px',
     }),
+    title: ({ theme }) => ({
+        marginTop: '2rem',
+        color: theme === 'dark' ? '#f8f9fa' : '#343a40',
+        fontSize: '18px',
+    }),
     table: {
         marginTop: '2rem',
-        textAlgin: 'center'
+        textAlgin: 'center',       
     },
     sort: {
         border: 'none',
@@ -22,15 +27,15 @@ export const style = {
         width: '100vw',
         height: '100vh',
         display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center',
-        justifyContent: 'center'
     },
     input: {
-        width: '15rem',
+        width: '10rem',
         marginTop: '1rem'
     },
     notFound: {
-        height: "75vh",
+        height: "85vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -38,16 +43,10 @@ export const style = {
         fontWeight: 600,
     },
     select: {
-        float: 'right',
-        width: '10rem',
+        width: '7rem',
         marginTop: '1rem',
-        direction: 'ltr'
-
     },
-    title: ({ theme }) => ({
-        marginTop: '1rem',
-        color: theme === 'dark' ? '#f8f9fa' : '#343a40'
-
-    }),
-
+    btn: {
+        marginTop: '1rem'
+    },
 }

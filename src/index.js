@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { store } from './app/store'
+import { store } from './components/store'
 import { Provider } from 'react-redux'
 import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css';

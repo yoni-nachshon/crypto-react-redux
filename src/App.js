@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Coins from './app/coins/coins';
-import Coin from "./app/coin/coin";
+import Coins from './components/coins';
+import Coin from "./components/coin";
 
 export default function App() {
 
