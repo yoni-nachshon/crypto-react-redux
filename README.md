@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Crypto App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://yoni-nachshon.github.io/crypto-react-redux
 
 ## Available Scripts
 
