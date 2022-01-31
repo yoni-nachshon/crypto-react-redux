@@ -87,7 +87,7 @@ export default function Coins() {
     setSortMode(sortMode === sortType.asc ? sortType.desc : sortType.asc);
   };
 
-  const coinList = crypto.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()))
+  const coinList = crypto.filter(coin => coin.symbol.toLowerCase().includes(search.toLowerCase()))
 
   return loading ? (
     <div className={classes.spinner}>
