@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getCoins } from '../coins/coinsSlice';
 import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
 import { makeStyles } from '@mui/styles';
 import { style } from "./style";
+import { goBack } from '../../utils/icons';
 
 const useStyles = makeStyles(style);
 
@@ -35,6 +36,9 @@ export default function Coin() {
                                 const low_24h = coin.market_data.low_24h.usd.toFixed(2)
                                 return (
                                     <Card.Body key={i}>
+                                        <Link to={'/'} style={{ float: "right", color:'inherit' }}>
+                                        <div style={{ float: "right" }}>{goBack}</div>
+                                        </Link>
 
                                         <div style={{ textAlign: 'left' }} >
                                             <Card.Title>

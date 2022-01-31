@@ -230,10 +230,8 @@ export default function Coins() {
                       <Link to={`/${coin.id}`} key={i}>
                         <img src={coin.image.thumb} alt="" />
                       </Link> 
-                      &nbsp;&nbsp;
-                      <span>
+                      &nbsp;&nbsp;&nbsp;
                       {coin.symbol.toUpperCase()}                    
-                      </span>
                     </td>
                     <td>${coin.market_data.current_price.usd.toFixed(2)}</td>
                     <td style={{ color: change_1h > 0 ? "green" : "red" }}>
