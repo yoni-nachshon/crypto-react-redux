@@ -2,7 +2,7 @@
     "top50": "Top 50 Coins",
     "rank": "Rank",
     "image": "Image",
-    "name": "Name",
+    "coin": "Coin",
     "symbol": "Symbol",
     "price": "Price",
     "change_in_1h":"1h",

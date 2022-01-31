@@ -131,17 +131,15 @@ export default function Coins() {
 
         <div className={classes.responsive} >
         <Table
-          // responsive="xl"
           variant={theme === "dark" ? "dark" : "light"}
           className={classes.table}
-          bordered
-          hover
+          hover bordered
         >
           {coinList.length ? (
             <thead>
               <tr>
                 <th>
-                  {t("rank")}&nbsp;
+                  {t("rank")} <br />
                   <Button
                     size="sm"
                     variant={theme === "dark" ? "dark" : "light"}
@@ -151,19 +149,8 @@ export default function Coins() {
                     {sortIcon}
                   </Button>{" "}
                 </th>
-                <th>
-                  {t("name")}&nbsp;
-                  <Button
-                    size="sm"
-                    variant={theme === "dark" ? "dark" : "light"}
-                    className={classes.sort}
-                    onClick={() => sortHandler(["name"])}
-                  >
-                    {sortIcon}
-                  </Button>
-                </th>
-                <th>
-                  {t("symbol")}&nbsp;
+                <th >
+                  {t("coin")} <br />
                   <Button
                     size="sm"
                     variant={theme === "dark" ? "dark" : "light"}
@@ -174,7 +161,7 @@ export default function Coins() {
                   </Button>
                 </th>
                 <th>
-                  {t("price")}&nbsp;
+                  {t("price")} <br />
                   <Button
                     size="sm"
                     variant={theme === "dark" ? "dark" : "light"}
@@ -187,7 +174,7 @@ export default function Coins() {
                   </Button>
                 </th>
                 <th>
-                  {t("change_in_1h")}&nbsp;
+                  {t("change_in_1h")} <br />
                   <Button
                     size="sm"
                     variant={theme === "dark" ? "dark" : "light"}
@@ -204,7 +191,7 @@ export default function Coins() {
                   </Button>
                 </th>
                 <th>
-                  {t("change_in_24h")}&nbsp;
+                  {t("change_in_24h")} <br />
                   <Button
                     size="sm"
                     variant={theme === "dark" ? "dark" : "light"}
@@ -217,7 +204,7 @@ export default function Coins() {
                   </Button>
                 </th>
                 <th>
-                  {t("marketCap")}&nbsp;
+                  {t("marketCap")} <br />
                   <Button
                     size="sm"
                     variant={theme === "dark" ? "dark" : "light"}
@@ -242,11 +229,12 @@ export default function Coins() {
                     <td>
                       <Link to={`/${coin.id}`} key={i}>
                         <img src={coin.image.thumb} alt="" />
-                      </Link>
-                      &nbsp;&nbsp;&nbsp;
-                      {coin.name}
+                      </Link> 
+                      &nbsp;&nbsp;
+                      <span>
+                      {coin.symbol.toUpperCase()}                    
+                      </span>
                     </td>
-                    <td>{coin.symbol}</td>
                     <td>${coin.market_data.current_price.usd.toFixed(2)}</td>
                     <td style={{ color: change_1h > 0 ? "green" : "red" }}>
                       {change_1h}%

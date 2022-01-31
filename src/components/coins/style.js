@@ -18,6 +18,7 @@ export const style = {
     table: {
         marginTop: '2rem',
         textAlgin: 'center',
+        
     },
     sort: {
         border: 'none',
@@ -51,7 +52,7 @@ export const style = {
     },
     responsive: {
         display: 'block',
-        width: '100%',
+        width: '70%',
         overflowX: 'auto',
     },
 }
