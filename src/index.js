@@ -10,7 +10,7 @@ const rootElement = document.getElementById("root");
 
 render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='crypto-react-redux'>
     <Provider store={store}>
       <App />
     </Provider>

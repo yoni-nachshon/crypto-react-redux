@@ -128,9 +128,10 @@ export default function Coins() {
           </Col>
         </Row>
         {coinList.length && <div className={classes.title}>{t("top50")}</div>}
-        
+
+        <div className={classes.responsive} >
         <Table
-          responsive="md"
+          // responsive="xl"
           variant={theme === "dark" ? "dark" : "light"}
           className={classes.table}
           bordered
@@ -262,6 +263,7 @@ export default function Coins() {
               )}
           </tbody>
         </Table>
+        </div>
       </Container>
     </>
   );
