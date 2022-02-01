@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.js": "/crypto-react-redux/static/js/main.cc206078.chunk.js",
-    "main.js.map": "/crypto-react-redux/static/js/main.cc206078.chunk.js.map",
+    "main.js": "/crypto-react-redux/static/js/main.544e9d3a.chunk.js",
+    "main.js.map": "/crypto-react-redux/static/js/main.544e9d3a.chunk.js.map",
     "runtime-main.js": "/crypto-react-redux/static/js/runtime-main.8ade5a1d.js",
     "runtime-main.js.map": "/crypto-react-redux/static/js/runtime-main.8ade5a1d.js.map",
     "static/css/2.383c0125.chunk.css": "/crypto-react-redux/static/css/2.383c0125.chunk.css",
-    "static/js/2.5298d537.chunk.js": "/crypto-react-redux/static/js/2.5298d537.chunk.js",
-    "static/js/2.5298d537.chunk.js.map": "/crypto-react-redux/static/js/2.5298d537.chunk.js.map",
+    "static/js/2.04dbf48c.chunk.js": "/crypto-react-redux/static/js/2.04dbf48c.chunk.js",
+    "static/js/2.04dbf48c.chunk.js.map": "/crypto-react-redux/static/js/2.04dbf48c.chunk.js.map",
     "index.html": "/crypto-react-redux/index.html",
     "static/css/2.383c0125.chunk.css.map": "/crypto-react-redux/static/css/2.383c0125.chunk.css.map",
-    "static/js/2.5298d537.chunk.js.LICENSE.txt": "/crypto-react-redux/static/js/2.5298d537.chunk.js.LICENSE.txt"
+    "static/js/2.04dbf48c.chunk.js.LICENSE.txt": "/crypto-react-redux/static/js/2.04dbf48c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8ade5a1d.js",
     "static/css/2.383c0125.chunk.css",
-    "static/js/2.5298d537.chunk.js",
-    "static/js/main.cc206078.chunk.js"
+    "static/js/2.04dbf48c.chunk.js",
+    "static/js/main.544e9d3a.chunk.js"
   ]
 }
