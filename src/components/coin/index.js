@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getCoins } from '../coins/coinsSlice';
 import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
 import { makeStyles } from '@mui/styles';
@@ -13,15 +13,16 @@ export default function Coin() {
 
     const classes = useStyles();
 
+    const navigate = useNavigate();
+    const params = useParams();
     const dispatch = useDispatch()
+
     const { coins } = useSelector((state) => state.coins)
 
     useEffect(() => {
         dispatch(getCoins())
     }, [dispatch]);
-
-    const params = useParams();
-
+  
     return (
         <Container className={classes.container}>
             <Row >
@@ -36,10 +37,9 @@ export default function Coin() {
                                 const low_24h = coin.market_data.low_24h.usd.toFixed(2)
                                 return (
                                     <Card.Body key={i}>
-                                        <Link to={'/'} style={{ float: "right", color:'inherit' }}>
-                                        <div style={{ float: "right" }}>{goBack}</div>
-                                        </Link>
-
+                                        <div style={{ float: "right" }} onClick={() => navigate(-1)}>
+                                            {goBack}
+                                        </div>
                                         <div style={{ textAlign: 'left' }} >
                                             <Card.Title>
                                                 Rank {coin.market_data.market_cap_rank}

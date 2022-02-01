@@ -45,11 +45,11 @@ export default function Coins() {
   }, [coins]);
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(getCoins());
-    setInterval(() => {
+      setLoading(true);
       dispatch(getCoins());
-    }, 60 * 1000);
+      setInterval(() => {
+        dispatch(getCoins());
+      }, 60 * 1000);
   }, [dispatch]);
 
   const onChange = (event) => {
