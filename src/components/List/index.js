@@ -11,9 +11,7 @@ const List = (props) => {
 
     const { t, theme, coinList, sortHandler } = props
 
-    const classes = useStyles({
-        theme: theme,
-    });
+    const classes = useStyles();
 
     return (
         <div className={classes.responsive} >
