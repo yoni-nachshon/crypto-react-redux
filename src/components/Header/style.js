@@ -5,9 +5,12 @@ export const style = {
         width: '7rem',
         marginTop: '1rem',
     },
-    btn: {
-        marginTop: '1rem'
-    },
+    btn: ({ theme }) => ({
+        background: theme === 'dark' ? '#212529' : 'none',
+        color: theme === 'dark' ? '#212529' : 'none',
+        marginTop: '1.1rem',
+        border: 'none',
+    }),
     input: {
         width: '10rem',
         marginTop: '1rem'

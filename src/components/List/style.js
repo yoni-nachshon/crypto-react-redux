@@ -7,10 +7,10 @@ export const style = {
     },
     sort: {
         border: 'none',
-        textAlgin: 'center',
+        // textAlgin: 'center',
     },
     notFound: {
-        height: "85vh",
+        height: "50vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

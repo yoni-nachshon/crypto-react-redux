@@ -3,8 +3,8 @@
 export const style = {
 
     container: ({ theme }) => ({
-        background: theme === 'dark' ? '#343a40' : '#f8f9fa',
-        color: theme === 'dark' ? '#343a40' : '#f8f9fa',
+        background: theme === 'dark' ? '#212529' : '#f8f9fa',
+        color: theme === 'dark' ? '#212529' : '#f8f9fa',
         display: ' flex',
         flexDirection: 'column',
         alignItems: 'center',

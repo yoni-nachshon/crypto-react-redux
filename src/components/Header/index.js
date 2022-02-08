@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { style } from "./style";
 import { i18n } from "../../translations/i18n";
 import { night, sun } from "../../utils/icons";
-import { Row, Col, Form, FormControl, Button } from "react-bootstrap";
+import { Row, Col, Form, FormControl } from "react-bootstrap";
 
 const useStyles = makeStyles(style);
 
@@ -11,7 +11,9 @@ const Header = (props) => {
 
     const { setSearch, theme, toggleTheme, t } = props;
 
-    const classes = useStyles();
+    const classes = useStyles({
+        theme: theme,
+      });
 
     const onChange = (event) => {
         event.preventDefault();
@@ -24,15 +26,13 @@ const Header = (props) => {
     return (
         <Row>
             <Col>
-                <Button
-                    variant={theme === "dark" ? "dark" : "light"}
-                    size="sm"
-                    type="button"
+                <button
+                    type='button'
                     onClick={toggleTheme}
                     className={classes.btn}
                 >
                     {theme === "dark" ? sun : night}
-                </Button>
+                </button>
             </Col>
 
             <Col>
