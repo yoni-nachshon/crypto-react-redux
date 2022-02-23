@@ -22,7 +22,7 @@ export default function Coin() {
     useEffect(() => {
         dispatch(getCoins())
     }, [dispatch]);
-  
+
     return (
         <Container className={classes.container}>
             <Row >

@@ -10,9 +10,7 @@ const useStyles = makeStyles(style);
 const List = (props) => {
   const { t, theme, coinList, sortHandler } = props;
 
-  const classes = useStyles({
-    coinList: coinList,
-  });
+  const classes = useStyles();
 
   const renderSortBtn = (sortFunc) => (
     <Button
@@ -92,7 +90,8 @@ const List = (props) => {
                     <Link to={`/${coin.id}`} key={i}>
                       <img src={coin.image.thumb} alt="" />
                     </Link>
-                    <span style={{ marginLeft: "0.5rem" }}>{symbol}</span>
+                    &nbsp;&nbsp;&nbsp;
+                    {symbol}
                   </td>
                   <td>${current_price}</td>
                   <td style={{ color: change_1h > 0 ? "green" : "red" }}>

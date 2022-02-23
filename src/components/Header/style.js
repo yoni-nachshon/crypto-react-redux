@@ -4,6 +4,8 @@ export const style = {
     select: {
         width: '7rem',
         marginTop: '1rem',
+        direction: 'ltr'
+        
     },
     btn: ({ theme }) => ({
         background: theme === 'dark' ? '#212529' : 'none',

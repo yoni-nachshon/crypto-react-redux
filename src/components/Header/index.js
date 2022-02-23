@@ -1,36 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import { style } from "./style";
 import { i18n } from "../../translations/i18n";
 import { night, sun } from "../../utils/icons";
-import { Row, Col, Form, FormControl } from "react-bootstrap";
+import { Row, Col, FormControl, Button, ButtonGroup } from "react-bootstrap";
 
 const useStyles = makeStyles(style);
 
 const Header = (props) => {
-
     const { setSearch, theme, toggleTheme, t } = props;
 
     const classes = useStyles({
         theme: theme,
-      });
+    });
+    useEffect(() => { });
 
-    const onChange = (event) => {
+    const onClick = (event) => {
         event.preventDefault();
-        event.target.value === "he" ?
-            (document.body.dir = i18n.dir("he")) :
-            (document.body.dir = i18n.dir("en"))
-        i18n.changeLanguage(event.target.value)
+        event.target.value === "he"
+            ? (document.body.dir = i18n.dir("he"))
+            : (document.body.dir = i18n.dir("en"));
+        i18n.changeLanguage(event.target.value);
     };
 
     return (
         <Row>
             <Col>
-                <button
-                    type='button'
+                <button type="button"
                     onClick={toggleTheme}
-                    className={classes.btn}
-                >
+                    className={classes.btn}>
                     {theme === "dark" ? sun : night}
                 </button>
             </Col>
@@ -47,10 +45,22 @@ const Header = (props) => {
                 />
             </Col>
             <Col>
-                <Form.Select className={classes.select} size="sm" onChange={onChange}>
-                    <option value="en">English</option>
-                    <option value="he">עברית</option>
-                </Form.Select>
+                <ButtonGroup className={classes.select} size="sm">
+                    <Button
+                        variant={theme === "dark" ? "dark" : "light"}
+                        value={"en"}
+                        onClick={onClick}
+                    >
+                        English
+                    </Button>
+                    <Button
+                        variant={theme === "dark" ? "dark" : "light"}
+                        value={"he"}
+                        onClick={onClick}
+                    >
+                        עברית
+                    </Button>
+                </ButtonGroup>
             </Col>
         </Row>
     );
