@@ -10,25 +10,30 @@ const useStyles = makeStyles(style);
 const Header = (props) => {
     const { setSearch, theme, toggleTheme, t } = props;
 
+   const storage = localStorage.getItem("i18nextLng")
+
     const classes = useStyles({
         theme: theme,
+        storage: storage,
     });
     useEffect(() => { });
 
     const onClick = (event) => {
         event.preventDefault();
-        event.target.value === "he"
-            ? (document.body.dir = i18n.dir("he"))
-            : (document.body.dir = i18n.dir("en"));
+        event.target.value === "he" ? 
+        (document.body.dir = i18n.dir("he")) : 
+        (document.body.dir = i18n.dir("en"))
         i18n.changeLanguage(event.target.value);
     };
 
     return (
-        <Row>
+        <Row className={classes.header}>
             <Col>
-                <button type="button"
+                <button
+                    type="button"
                     onClick={toggleTheme}
-                    className={classes.btn}>
+                    className={classes.btn}
+                >
                     {theme === "dark" ? sun : night}
                 </button>
             </Col>
@@ -45,22 +50,14 @@ const Header = (props) => {
                 />
             </Col>
             <Col>
-                <ButtonGroup className={classes.select} size="sm">
-                    <Button
-                        variant={theme === "dark" ? "dark" : "light"}
-                        value={"en"}
-                        onClick={onClick}
-                    >
-                        English
-                    </Button>
-                    <Button
-                        variant={theme === "dark" ? "dark" : "light"}
-                        value={"he"}
-                        onClick={onClick}
-                    >
-                        עברית
-                    </Button>
-                </ButtonGroup>
+                <Button
+                    className={classes.lng} size="sm"
+                    variant={theme === "dark" ? "dark" : "light"}
+                    value={storage === "en" ? "he" : "en"}
+                    onClick={onClick}
+                >
+                    {storage === "en" ? "עברית" : "English"}
+                </Button>
             </Col>
         </Row>
     );

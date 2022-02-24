@@ -1,11 +1,11 @@
 
 
 export const style = {
-    select: {
-        width: '7rem',
-        marginTop: '1rem',
-        direction: 'ltr'
-        
+    header: {
+        direction: 'ltr'  
+    },
+    lng: {
+        marginTop: '1rem',       
     },
     btn: ({ theme }) => ({
         background: theme === 'dark' ? '#212529' : 'none',
@@ -13,8 +13,9 @@ export const style = {
         marginTop: '1.1rem',
         border: 'none',
     }),
-    input: {
+    input: ({ storage }) => ({
         width: '10rem',
-        marginTop: '1rem'
-    },
+        marginTop: '1rem',
+        direction: storage === 'en' ? 'ltr' : 'rtl',
+    }),
 }
