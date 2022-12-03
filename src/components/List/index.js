@@ -23,6 +23,15 @@ const List = (props) => {
     </Button>
   );
 
+  const sortByName = {
+    "rank": ["market_data", "market_cap_rank"],
+    "coin": ["symbol"],
+    "price": ["market_data", "current_price", "usd"],
+    "change_in_1h": ["market_data", "price_change_percentage_1h_in_currency", "usd"],
+    "change_in_24h": ["market_data", "price_change_percentage_24h"],
+    "marketCap": ["market_data", "market_cap_rank"],
+  };
+
   return (
     <div className={classes.responsive}>
       <Table
@@ -33,74 +42,40 @@ const List = (props) => {
         {coinList.length ? (
           <thead>
             <tr>
-              <th>
-                {t("rank")} <br />
-                {renderSortBtn(() =>
-                  sortHandler(["market_data", "market_cap_rank"])
-                )}
-              </th>
-              <th>
-                {t("coin")} <br />
-                {renderSortBtn(() => sortHandler(["symbol"]))}
-              </th>
-              <th>
-                {t("price")} <br />
-                {renderSortBtn(() =>
-                  sortHandler(["market_data", "current_price", "usd"])
-                )}
-              </th>
-              <th>
-                {t("change_in_1h")} <br />
-                {renderSortBtn(() =>
-                  sortHandler(["market_data","price_change_percentage_1h_in_currency","usd"])
-                )}
-              </th>
-              <th>
-                {t("change_in_24h")} <br />
-                {renderSortBtn(() =>
-                  sortHandler(["market_data", "price_change_percentage_24h"])
-                )}
-              </th>
-              <th>
-                {t("marketCap")} <br />
-                {renderSortBtn(() =>
-                  sortHandler(["market_data", "market_cap_rank"])
-                )}
-              </th>
+              {Object.entries(sortByName).map(([key, value]) => (
+                <th>
+                  {t(key)} <br />
+                  {renderSortBtn(() => sortHandler([value]))}
+                </th>
+              ))}
             </tr>
           </thead>
         ) : null}
         {coinList.length ? (
           <tbody>
             {coinList.map((coin, i) => {
-              const rank = coin.market_data.market_cap_rank;
-              const symbol = coin.symbol.toUpperCase();
-              const current_price =
-                coin.market_data.current_price.usd.toFixed(2);
-              const change_1h =
-                coin.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2);
-              const change_24h =
-                coin.market_data.price_change_percentage_24h.toFixed(2);
-              const market_cap =
-                coin.market_data.market_cap.usd.toLocaleString();
+              const change_1h = coin.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2);
+              const change_24h = coin.market_data.price_change_percentage_24h.toFixed(2);
               return (
                 <tr key={i}>
-                  <td>{rank}</td>
+                  <td>{coin.market_data.market_cap_rank}</td>
                   <td>
                     <Link to={`/${coin.id}`} key={i}>
                       <img src={coin.image.thumb} alt="" />
                     </Link>
                     &nbsp;&nbsp;&nbsp;
-                    {symbol}
+                    {coin.symbol.toUpperCase()}
                   </td>
-                  <td>${current_price}</td>
+                  <td>${coin.market_data.current_price.usd.toFixed(2)}</td>
                   <td style={{ color: change_1h > 0 ? "green" : "red" }}>
                     {change_1h}%
                   </td>
                   <td style={{ color: change_24h > 0 ? "green" : "red" }}>
                     {change_24h}%
                   </td>
-                  <td style={{ width: "100px" }}>${market_cap}</td>
+                  <td style={{ width: "100px" }}>
+                    ${coin.market_data.market_cap.usd.toLocaleString()}
+                  </td>
                 </tr>
               );
             })}
