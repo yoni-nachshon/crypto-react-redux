@@ -45,7 +45,7 @@ const List = (props) => {
               {Object.entries(sortByName).map(([key, value]) => (
                 <th>
                   {t(key)} <br />
-                  {renderSortBtn(() => sortHandler([value]))}
+                  {renderSortBtn(() => sortHandler(value))}
                 </th>
               ))}
             </tr>
