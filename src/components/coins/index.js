@@ -21,7 +21,7 @@ const sortType = Object.freeze({
   desc: "deck",
 });
 
-export default function Coins() {
+export default function Coins({getValueByPath}) {
 
   const { t } = useTranslation();
 
@@ -52,14 +52,6 @@ export default function Coins() {
       dispatch(getCoins());
     }, 60 * 1000);
   }, [dispatch]);
-
-  const getValueByPath = (obj, path) => {
-    let value;
-    path.forEach((v, i) => {
-      value = i ? value[path[i]] : obj[path[i]];
-    });
-    return value;
-  };
 
   const sortHandler = (sortBy) => {
     const copy = [...coins];
@@ -108,6 +100,7 @@ export default function Coins() {
           theme={theme}
           coinList={coinList}
           sortHandler={sortHandler}
+          getValueByPath={getValueByPath}
         />
 
       </Container>

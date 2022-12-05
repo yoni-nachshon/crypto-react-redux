@@ -16,7 +16,6 @@ const Header = (props) => {
         theme: theme,
         storage: storage,
     });
-    useEffect(() => { });
 
     const onClick = (event) => {
         event.preventDefault();

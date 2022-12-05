@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles(style);
 
 const List = (props) => {
-  const { t, theme, coinList, sortHandler } = props;
+  const { t, theme, coinList, sortHandler, getValueByPath } = props;
 
   const classes = useStyles();
 
@@ -29,8 +29,12 @@ const List = (props) => {
     "price": ["market_data", "current_price", "usd"],
     "change_in_1h": ["market_data", "price_change_percentage_1h_in_currency", "usd"],
     "change_in_24h": ["market_data", "price_change_percentage_24h"],
-    "marketCap": ["market_data", "market_cap_rank"],
+    "marketCap": ["market_data", "market_cap", "usd"],
   };
+
+  const getValue = (coin, key) => {
+    return getValueByPath(coin, sortByName[key]);
+  }
 
   return (
     <div className={classes.responsive}>
@@ -51,14 +55,13 @@ const List = (props) => {
             </tr>
           </thead>
         ) : null}
+        
         {coinList.length ? (
           <tbody>
             {coinList.map((coin, i) => {
-              const change_1h = coin.market_data.price_change_percentage_1h_in_currency.usd.toFixed(2);
-              const change_24h = coin.market_data.price_change_percentage_24h.toFixed(2);
               return (
                 <tr key={i}>
-                  <td>{coin.market_data.market_cap_rank}</td>
+                  <td>{getValue(coin, 'rank')}</td>
                   <td>
                     <Link to={`/${coin.id}`} key={i}>
                       <img src={coin.image.thumb} alt="" />
@@ -66,15 +69,15 @@ const List = (props) => {
                     &nbsp;&nbsp;&nbsp;
                     {coin.symbol.toUpperCase()}
                   </td>
-                  <td>${coin.market_data.current_price.usd.toFixed(2)}</td>
-                  <td style={{ color: change_1h > 0 ? "green" : "red" }}>
-                    {change_1h}%
+                  <td>${getValue(coin, 'price').toFixed(2)}</td>
+                  <td style={{ color: getValue(coin, 'change_in_1h') > 0 ? "green" : "red" }}>
+                    {getValue(coin, 'change_in_1h').toFixed(2)}%
                   </td>
-                  <td style={{ color: change_24h > 0 ? "green" : "red" }}>
-                    {change_24h}%
+                  <td style={{ color: getValue(coin, 'change_in_24h') > 0 ? "green" : "red" }}>
+                    {getValue(coin, 'change_in_24h').toFixed(2)}%
                   </td>
                   <td style={{ width: "100px" }}>
-                    ${coin.market_data.market_cap.usd.toLocaleString()}
+                    ${getValue(coin, 'marketCap').toLocaleString()}
                   </td>
                 </tr>
               );

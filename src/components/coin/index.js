@@ -9,7 +9,7 @@ import { goBack } from '../../utils/icons';
 
 const useStyles = makeStyles(style);
 
-export default function Coin() {
+export default function Coin({ getValueByPath }) {
 
     const classes = useStyles();
 
@@ -23,6 +23,18 @@ export default function Coin() {
         dispatch(getCoins())
     }, [dispatch]);
 
+    const data = {
+        "rank": ["market_data", "market_cap_rank"],
+        "_24h": ["market_data", "price_change_percentage_24h"],
+        "current_price": ["market_data", "current_price", "usd"],
+        "high_24h": ["market_data", "high_24h", "usd"],
+        "low_24h": ["market_data", "low_24h", "usd"],
+    }
+
+    const getValue = (coin, key) => {
+        return getValueByPath(coin, data[key]).toFixed(2);
+    }
+
     return (
         <Container className={classes.container}>
             <Row >
@@ -31,10 +43,6 @@ export default function Coin() {
                         {coins
                             .filter(coin => coin.id === params.coinId)
                             .map((coin, i) => {
-                                const _24h = coin.market_data.price_change_percentage_24h.toFixed(2);
-                                const current = coin.market_data.current_price.usd.toFixed(2)
-                                const high_24h = coin.market_data.high_24h.usd.toFixed(2)
-                                const low_24h = coin.market_data.low_24h.usd.toFixed(2)
                                 return (
                                     <Card.Body key={i}>
                                         <div style={{ float: "right" }} onClick={() => navigate(-1)}>
@@ -42,15 +50,15 @@ export default function Coin() {
                                         </div>
                                         <div style={{ textAlign: 'left' }} >
                                             <Card.Title>
-                                                Rank {coin.market_data.market_cap_rank}
+                                                Rank {getValue(coin,'rank')}
                                             </Card.Title>
 
                                             <img src={coin.image.thumb} alt='' /> {coin.name} ({coin.symbol})
                                             <div className={classes.current} >
-                                                ${current}&nbsp;
-                                                <span style={{ fontSize: '14px', color: _24h > 0 ? 'green' : 'red' }}>{_24h}%</span>
+                                                ${getValue(coin,'current_price')}&nbsp;
+                                                <span style={{ fontSize: '14px', color: getValue(coin,'_24h') > 0 ? 'green' : 'red' }}>{getValue(coin,'_24h')}%</span>
                                             </div>
-                                            <ProgressBar className={classes.progress} variant="warning" min={low_24h} now={current} max={high_24h} />
+                                            <ProgressBar className={classes.progress} variant="warning" min={getValue(coin,'low_24h')} now={getValue(coin,'current_price')} max={getValue(coin,'high_24h')} />
                                             <div className={classes.range}>
                                                 ${coin.market_data.low_24h.usd.toFixed(2)}
                                                 <span >24H Range</span>
