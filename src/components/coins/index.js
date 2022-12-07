@@ -8,8 +8,7 @@ import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import { style } from "./style";
 
-import { Container } from "react-bootstrap";
-import { Spinner } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 
 import Header from "../Header";
 import List from "../List";
@@ -21,7 +20,7 @@ const sortType = Object.freeze({
   desc: "deck",
 });
 
-export default function Coins({getValueByPath}) {
+export default function Coins({ getValueByPath }) {
 
   const { t } = useTranslation();
 
@@ -32,9 +31,12 @@ export default function Coins({getValueByPath}) {
 
   const dispatch = useDispatch();
   const { coins } = useSelector((state) => state.coins);
- 
+
   const [crypto, setCrypto] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [show, setShow] = useState(false);
+  const toggleShow = () => setShow(!show);
 
   const classes = useStyles({
     theme: theme,
@@ -46,7 +48,7 @@ export default function Coins({getValueByPath}) {
   }, [coins]);
 
   useEffect(() => {
-      setLoading(true);
+    setLoading(true);
     dispatch(getCoins());
     setInterval(() => {
       dispatch(getCoins());
@@ -87,6 +89,8 @@ export default function Coins({getValueByPath}) {
           setSearch={setSearch}
           theme={theme}
           toggleTheme={toggleTheme}
+          show={show}
+          toggleShow={toggleShow}
         />
 
         {coinList.length &&
@@ -101,6 +105,8 @@ export default function Coins({getValueByPath}) {
           coinList={coinList}
           sortHandler={sortHandler}
           getValueByPath={getValueByPath}
+          show={show}
+          toggleShow={toggleShow}
         />
 
       </Container>

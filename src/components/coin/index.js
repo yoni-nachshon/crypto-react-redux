@@ -32,7 +32,8 @@ export default function Coin({ getValueByPath }) {
     }
 
     const getValue = (coin, key) => {
-        return getValueByPath(coin, data[key]).toFixed(2);
+        let value = getValueByPath(coin, data[key]);
+        return (value % 1 !== 0) ? value.toFixed(2) : value;
     }
 
     return (
@@ -50,7 +51,7 @@ export default function Coin({ getValueByPath }) {
                                         </div>
                                         <div style={{ textAlign: 'left' }} >
                                             <Card.Title>
-                                                Rank {getValue(coin,'rank')}
+                                                Rank ({getValue(coin,'rank')})
                                             </Card.Title>
 
                                             <img src={coin.image.thumb} alt='' /> {coin.name} ({coin.symbol})
@@ -60,9 +61,9 @@ export default function Coin({ getValueByPath }) {
                                             </div>
                                             <ProgressBar className={classes.progress} variant="warning" min={getValue(coin,'low_24h')} now={getValue(coin,'current_price')} max={getValue(coin,'high_24h')} />
                                             <div className={classes.range}>
-                                                ${coin.market_data.low_24h.usd.toFixed(2)}
+                                                ${getValue(coin,'low_24h')}
                                                 <span >24H Range</span>
-                                                <span >${coin.market_data.high_24h.usd.toFixed(2)}</span>
+                                                <span >${getValue(coin,'high_24h')}</span>
                                             </div>
                                         </div>
                                     </Card.Body>

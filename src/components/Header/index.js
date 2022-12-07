@@ -2,15 +2,15 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import { style } from "./style";
 import { i18n } from "../../translations/i18n";
-import { night, sun } from "../../utils/icons";
+import { info, night, sun } from "../../utils/icons";
 import { Row, Col, FormControl, Button, ButtonGroup } from "react-bootstrap";
 
 const useStyles = makeStyles(style);
 
 const Header = (props) => {
-    const { setSearch, theme, toggleTheme, t } = props;
+    const { setSearch, theme, toggleTheme, t, show, toggleShow } = props;
 
-   const storage = localStorage.getItem("i18nextLng")
+    const storage = localStorage.getItem("i18nextLng")
 
     const classes = useStyles({
         theme: theme,
@@ -19,14 +19,24 @@ const Header = (props) => {
 
     const onClick = (event) => {
         event.preventDefault();
-        event.target.value === "he" ? 
-        (document.body.dir = i18n.dir("he")) : 
-        (document.body.dir = i18n.dir("en"))
+        event.target.value === "he" ?
+            (document.body.dir = i18n.dir("he")) :
+            (document.body.dir = i18n.dir("en"))
         i18n.changeLanguage(event.target.value);
     };
 
     return (
         <Row className={classes.header}>
+
+            <Col>
+                <button
+                    type="button"
+                    onClick={toggleShow}
+                    className={classes.btn}
+                >
+                    {info}
+                </button>
+            </Col>
             <Col>
                 <button
                     type="button"

@@ -1,5 +1,5 @@
-import React from "react";
-import { Table, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Table, Button, Dropdown, Toast } from "react-bootstrap";
 import { makeStyles } from "@mui/styles";
 import { style } from "./style";
 import { sortIcon } from "../../utils/icons";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles(style);
 
 const List = (props) => {
-  const { t, theme, coinList, sortHandler, getValueByPath } = props;
+  const { t, theme, coinList, sortHandler, getValueByPath, show, toggleShow } = props;
 
   const classes = useStyles();
 
@@ -38,6 +38,29 @@ const List = (props) => {
 
   return (
     <div className={classes.responsive}>
+
+      <Toast show={show} onClose={toggleShow}>
+      <Toast.Header>
+        <strong className="me-auto">Tip!</strong>
+      </Toast.Header>
+      <Toast.Body style={{color: 'InfoText'}}> Click on any coin to see more details. </Toast.Body>
+    </Toast>
+
+      {/* <Dropdown>
+        <Dropdown.Toggle>
+          {t("sort_by")}
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {Object.entries(sortByName).map(([key, value], i) => (
+            <Dropdown.Item
+              onClick={() => renderSortBtn(sortHandler(value))}
+              eventKey={i}>
+              {t(key)}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown> */}
+
       <Table
         variant={theme === "dark" ? "dark" : "light"}
         className={classes.table}
@@ -48,14 +71,14 @@ const List = (props) => {
             <tr>
               {Object.entries(sortByName).map(([key, value]) => (
                 <th>
-                  {t(key)} <br />
+                  {t(key)} 
                   {renderSortBtn(() => sortHandler(value))}
                 </th>
               ))}
             </tr>
           </thead>
         ) : null}
-        
+
         {coinList.length ? (
           <tbody>
             {coinList.map((coin, i) => {
